@@ -5,13 +5,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity2">
+    
+    <TextView
+        android:id="@+id/et1"
+        android:layout_width="68dp"
+        android:layout_height="70dp"
+        android:background="@drawable/border_choice"
+        android:text="IND"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/et2"
+        android:layout_width="68dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="1dp"
+        android:text="USA"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:background="@drawable/border_choice"
+        app:layout_constraintStart_toEndOf="@id/et1"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/et3"
+        android:layout_width="68dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="1dp"
+        android:text="AUS"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:background="@drawable/border_choice"
+        app:layout_constraintStart_toEndOf="@id/et2"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/et4"
+        android:layout_width="68dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="1dp"
+        android:text="RUS"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:background="@drawable/border_choice"
+        app:layout_constraintStart_toEndOf="@id/et3"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/et5"
+        android:layout_width="68dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="1dp"
+        android:text="FRN"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:background="@drawable/border_choice"
+        app:layout_constraintStart_toEndOf="@id/et4"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/et6"
+        android:layout_width="68dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="1dp"
+        android:text="UK"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:background="@drawable/border_choice"
+        app:layout_constraintStart_toEndOf="@id/et5"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/et1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

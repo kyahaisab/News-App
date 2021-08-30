@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
+//add share capability, login option
 class ChoiceAdapter(val listOfChoice: ArrayList<String>, val listner2:ChoiceInterface) : RecyclerView.Adapter<ChoiceViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChoiceViewHolder {
         val vieww=LayoutInflater.from(parent.context).inflate(R.layout.activity_choice,parent,false)

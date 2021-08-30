@@ -5,15 +5,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main2.*
-import java.lang.reflect.Array
 
 class MainActivity2 : AppCompatActivity(), ChoiceInterface {
 
-    lateinit var contentList:ArrayList<String>
+    lateinit var contentList: ArrayList<String>
+    var country: String = "in"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
+
+        et1.setOnClickListener { country = "in" }
+        et2.setOnClickListener { country = "us" }
+        et3.setOnClickListener { country = "au" }
+        et4.setOnClickListener { country = "ru" }
+        et1.setOnClickListener { country = "fr" }
+        et2.setOnClickListener { country = "gb" }
 
         recyclerView2.layoutManager = LinearLayoutManager(this)
         val adapterr = ChoiceAdapter(getType(), this)
@@ -22,7 +29,7 @@ class MainActivity2 : AppCompatActivity(), ChoiceInterface {
 
     private fun getType(): ArrayList<String> {
         val typee = ArrayList<String>()
-        contentList=ArrayList<String>()
+        contentList = ArrayList<String>()
 
         typee.add("Business")
         typee.add("Entertainment")
@@ -44,9 +51,9 @@ class MainActivity2 : AppCompatActivity(), ChoiceInterface {
     }
 
     override fun onChoiceClicked(t: Int) {
-       val intent=Intent(this,MainActivity::class.java)
-        intent.putExtra("ContentType",contentList[t])
-
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("ContentType", contentList[t])
+        intent.putExtra("CNTRY", country)
         startActivity(intent)
     }
 }

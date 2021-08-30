@@ -23,11 +23,13 @@ import org.json.JSONObject
 
 class MainActivity : AppCompatActivity(), ItemTouch {
     lateinit var mAdapter: NewsAdapter
-    var anstype:String="business"
+    var anstype: String = "business"
+    var countyType: String = "in"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         anstype = intent.getStringExtra("ContentType").toString()
+        countyType = intent.getStringExtra("CNTRY").toString()
         recyclerView.layoutManager = LinearLayoutManager(this)
         getItem()
         mAdapter = NewsAdapter(this)
@@ -35,7 +37,8 @@ class MainActivity : AppCompatActivity(), ItemTouch {
     }
 
     private fun getItem() {
-        val url ="https://saurav.tech/NewsAPI/top-headlines/category/"+anstype+"/in.json\n"
+        val url =
+            "https://saurav.tech/NewsAPI/top-headlines/category/" + anstype + "/" + countyType + ".json\n"
 
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
@@ -50,7 +53,7 @@ class MainActivity : AppCompatActivity(), ItemTouch {
                         newsJsonObject.getString("url"),
                         newsJsonObject.getString("urlToImage")
                     )
-                  //  Log.d("SAAGR",newsJsonArray.getJSONObject(i).getString("title"))
+                    //  Log.d("SAAGR",newsJsonArray.getJSONObject(i).getString("title"))
 
                     newsArray.add(news)
                 }
@@ -66,9 +69,9 @@ class MainActivity : AppCompatActivity(), ItemTouch {
     }
 
     override fun onItemClicked(st: News) {
-        Toast.makeText(this,st.url,Toast.LENGTH_SHORT).show()
-        val  builder  =CustomTabsIntent.Builder();
-        val customTabsIntent  = builder.build();
+        Toast.makeText(this, st.url, Toast.LENGTH_SHORT).show()
+        val builder = CustomTabsIntent.Builder();
+        val customTabsIntent = builder.build();
         customTabsIntent.launchUrl(this, Uri.parse(st.url));
     }
 }
