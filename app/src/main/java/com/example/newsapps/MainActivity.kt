@@ -19,23 +19,44 @@ import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity(), ItemTouch {
+    lateinit var mAdapter:NewsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 recyclerView.layoutManager=LinearLayoutManager(this)
-        val x=NewsAdapter(getItem(),this)
-        recyclerView.adapter=x
+        getItem()
+        val mAdapter=NewsAdapter(this)
+        recyclerView.adapter=mAdapter
     }
 
-    private fun getItem(): ArrayList<String> {
-     val list= ArrayList<String>()
-        for(i in 0 until 20){
-            list.add("Item $i")
-        }
-        return list
+    private fun getItem() {
+        val url = "https://newsapi.org/v2/everything?q=tesla&from=2021-07-30&sortBy=publishedAt&apiKey=78ff1c7d05464705ac9c28cb71eb684e"
+
+        val jsonObjectRequest = JsonObjectRequest(
+            Request.Method.GET, url, null,
+            Response.Listener {
+val newsJsonArray=it.getJSONArray("articles")
+                val newsArray=ArrayList<News>()
+                for(i in 0 until newsJsonArray.length()){
+                    val newsJsonObject=newsJsonArray.getJSONObject(i)
+                    val news=News(newsJsonObject.getString("title"),
+                        newsJsonObject.getString("author"),
+                        newsJsonObject.getString("url"),
+                        newsJsonObject.getString("urlToImage"))
+                    newsArray.add(news)
+                }
+
+mAdapter.updateNews(newsArray)
+
+            },
+            {
+
+            })
+
+// Add the request to the RequestQueue.
+        MySinglton.getInstance(this).addToRequestQueue(jsonObjectRequest)
     }
 
-    override fun onItemClicked(st: String) {
-        Toast.makeText(this, " $st is clicked", Toast.LENGTH_SHORT).show()
+    override fun onItemClicked(st: News) {
     }
 }
