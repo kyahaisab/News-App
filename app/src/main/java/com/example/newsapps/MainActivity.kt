@@ -23,9 +23,11 @@ import org.json.JSONObject
 
 class MainActivity : AppCompatActivity(), ItemTouch {
     lateinit var mAdapter: NewsAdapter
+    var anstype:String="business"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        anstype = intent.getStringExtra("ContentType").toString()
         recyclerView.layoutManager = LinearLayoutManager(this)
         getItem()
         mAdapter = NewsAdapter(this)
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity(), ItemTouch {
     }
 
     private fun getItem() {
-        val url ="https://saurav.tech/NewsAPI/top-headlines/category/business/in.json\n"
+        val url ="https://saurav.tech/NewsAPI/top-headlines/category/"+anstype+"/in.json\n"
 
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
