@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class NewsAdapter(val listner:ItemTouch): RecyclerView.Adapter<NewsViewHolder>() {
-    val item=ArrayList<News>()
+class NewsAdapter(val listner: ItemTouch) : RecyclerView.Adapter<NewsViewHolder>() {
+    val item = ArrayList<News>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
-        val view=LayoutInflater.from(parent.context).inflate(R.layout.activity_news,parent,false)
-        val viewHolder=NewsViewHolder(view)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.activity_news, parent, false)
+        val viewHolder = NewsViewHolder(view)
         view.setOnClickListener {
             listner.onItemClicked(item[viewHolder.adapterPosition])
         }
@@ -18,13 +19,14 @@ class NewsAdapter(val listner:ItemTouch): RecyclerView.Adapter<NewsViewHolder>()
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-       holder.titleView.text=item[position].title
+        holder.titleView.text = item[position].title
     }
 
     override fun getItemCount(): Int {
-       return item.size
+        return item.size
     }
-    fun updateNews(updatedItems:ArrayList<News>){
+
+    fun updateNews(updatedItems: ArrayList<News>) {
         item.clear()
         item.addAll(updatedItems)
 
@@ -32,10 +34,10 @@ class NewsAdapter(val listner:ItemTouch): RecyclerView.Adapter<NewsViewHolder>()
     }
 }
 
-class NewsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-    val titleView:TextView=itemView.findViewById(R.id.title)
+class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    val titleView: TextView = itemView.findViewById(R.id.title)
 }
 
-interface ItemTouch{
-    fun onItemClicked(st:News)
+interface ItemTouch {
+    fun onItemClicked(st: News)
 }
