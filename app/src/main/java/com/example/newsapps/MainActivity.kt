@@ -1,11 +1,13 @@
 package com.example.newsapps
 
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.Response
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity(), ItemTouch {
     }
 
     private fun getItem() {
-        val url ="https://saurav.tech/NewsAPI/top-headlines/category/health/in.json\n"
+        val url ="https://saurav.tech/NewsAPI/top-headlines/category/business/in.json\n"
 
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
@@ -62,5 +64,9 @@ class MainActivity : AppCompatActivity(), ItemTouch {
     }
 
     override fun onItemClicked(st: News) {
+        Toast.makeText(this,st.url,Toast.LENGTH_SHORT).show()
+        val  builder  =CustomTabsIntent.Builder();
+        val customTabsIntent  = builder.build();
+        customTabsIntent.launchUrl(this, Uri.parse(st.url));
     }
 }
