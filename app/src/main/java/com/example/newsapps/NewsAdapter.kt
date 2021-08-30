@@ -3,8 +3,11 @@ package com.example.newsapps
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import java.lang.System.load
 
 class NewsAdapter(val listner: ItemTouch) : RecyclerView.Adapter<NewsViewHolder>() {
     val item = ArrayList<News>()
@@ -20,6 +23,8 @@ class NewsAdapter(val listner: ItemTouch) : RecyclerView.Adapter<NewsViewHolder>
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         holder.titleView.text = item[position].title
+        holder.author.text=item[position].author
+       Glide.with(holder.itemView.context).load(item[position].imageToUrl).into(holder.image)
     }
 
     override fun getItemCount(): Int {
@@ -36,6 +41,8 @@ class NewsAdapter(val listner: ItemTouch) : RecyclerView.Adapter<NewsViewHolder>
 
 class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val titleView: TextView = itemView.findViewById(R.id.title)
+val image:ImageView=itemView.findViewById(R.id.image)
+    val author:TextView=itemView.findViewById(R.id.author)
 }
 
 interface ItemTouch {
